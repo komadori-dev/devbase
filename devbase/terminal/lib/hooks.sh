@@ -1,8 +1,8 @@
 # hooks.sh — run executable scripts from .devcontainer/pre-attach/ and post-attach/.
 # Exposes: run_pre_attach_hooks(), run_post_attach_hooks()
-# Reads: DEVBASE_HOOKS_DIR (default: /workspaces/.devcontainer)
+# Reads: DEVBASE_HOOKS_DIR (overrides default), WORKSPACE_FOLDER (injected by devcontainers)
 
-HOOKS_BASE_DIR="${DEVBASE_HOOKS_DIR:-/workspaces/.devcontainer}"
+HOOKS_BASE_DIR="${DEVBASE_HOOKS_DIR:-${WORKSPACE_FOLDER}/.devcontainer}"
 
 # Run all executable *.sh scripts in a hooks directory, in lexicographic order.
 # Usage: _run_hooks <phase> <dir>
@@ -11,6 +11,7 @@ _run_hooks() {
   local dir="$2"
 
   if [ ! -d "$dir" ]; then
+    gum log --time rfc822 --level debug "no $phase directory found (in $dir), skipping..."
     return 0
   fi
 
