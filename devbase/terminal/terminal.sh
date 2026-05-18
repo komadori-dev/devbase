@@ -21,6 +21,7 @@ source "$LIB/lib/sysinfo.sh"
 source "$LIB/lib/kuchipachi/greet.sh"
 source "$LIB/lib/git.sh"
 source "$LIB/lib/preset.sh"
+source "$LIB/lib/hooks.sh"
 source "$LIB/lib/menu.sh"
 
 
@@ -32,8 +33,10 @@ C_KEY=$(fg "$COLOR_KEY")
 term_cols=$(tput cols 2>/dev/null || echo 80)
 gum log --time rfc822 --level info "dev container initialized, peparing post attach commands..."
 
-# ---- presets -------------------------------------------------------------
+# ---- hooks + presets -----------------------------------------------------
+run_pre_attach_hooks
 print_presets_info
+run_post_attach_hooks
 
 # ---- git info ------------------------------------------------------------
 print_git_info
