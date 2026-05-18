@@ -8,7 +8,6 @@
     "workspaceFolder": "/workspace/python-example",
     "containerEnv": {
         "DEVBASE_PRESETS": "python",
-        "DEVBASE_HOOKS_DIR": "/workspace/python-example/.devcontainer"
     },
     "postAttachCommand": "terminal",
     "customizations": {

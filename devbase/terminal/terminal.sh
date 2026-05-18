@@ -31,7 +31,8 @@ C_KEY=$(fg "$COLOR_KEY")
 
 # ---- layout --------------------------------------------------------------
 term_cols=$(tput cols 2>/dev/null || echo 80)
-gum log --time rfc822 --level info "dev container initialized, peparing post attach commands..."
+gum log --time rfc822 --level info "dev container initialized, preparing post attach commands..."
+gum log --time rfc822 --level debug "workdir: $PWD"
 
 # ---- hooks + presets -----------------------------------------------------
 run_pre_attach_hooks
