@@ -81,4 +81,41 @@ Scaffold a new project's `.devcontainer/` interactively:
 bash -c "$(curl -fsSL "https://raw.githubusercontent.com/RobinDeClerck/devcontainer/main/templates/init.sh?$(date +%s)")"
 ```
 
-Walks 
+Walks you through name, slug, and preset, then drops `.devcontainer/devcontainer.json`, `Dockerfile`, `docker-compose.override.yml`, and `docker-compose.yml` into the current directory.
+
+Requires [`gum`](https://github.com/charmbracelet/gum) — the script will offer to install it via Homebrew if missing.
+
+## Develop
+
+```bash
+git clone git@github.com:RobinDeClerck/devcontainer.git
+# Open in VS Code → Reopen in Container
+```
+
+Tag a release to publish a new image to GHCR:
+
+```bash
+git tag v0.2.0
+git push origin v0.2.0
+```
+
+To see existing tags:
+
+```bash
+git tag --sort=-creatordate -l --format='%(creatordate:short) %(refname:short)'
+```
+
+To republish an existing tag:
+
+```bash
+git tag -d v0.2.0                  # delete local
+git push origin :refs/tags/v0.2.0  # delete remote
+git tag v0.2.0                     # recreate
+git push origin v0.2.0             # push again
+```
+
+> Note: anyone who already pulled `v0.2.0` won't get the update automatically — bump the version instead if that matters.
+
+## License
+
+MIT — © Robin De Clerck
