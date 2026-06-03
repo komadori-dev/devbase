@@ -2,6 +2,8 @@
 
 > _"It works on my machine."_ — Famous last words, before dev containers.
 
+[![Publish image](https://github.com/robindeclerck/devbase/actions/workflows/publish.yml/badge.svg)](https://github.com/robindeclerck/devbase/actions/workflows/publish.yml) [![devcontainer](https://github.com/robindeclerck/devbase/actions/workflows/test-devcontainer.yml/badge.svg)](https://github.com/robindeclerck/devbase/actions/workflows/test-devcontainer.yml) [![BASH MENU/TERMINAL](https://github.com/robindeclerck/devbase/actions/workflows/test-terminal.yml/badge.svg)](https://github.com/robindeclerck/devbase/actions/workflows/test-terminal.yml)
+
 A shared Alpine-based dev container image with a terminal banner, [Starship](https://starship.rs) prompt, and language presets that auto-install dependencies on attach.
 
 ![devbase terminal](docs/terminal.png)
@@ -91,6 +93,22 @@ If a script exits non-zero, the run aborts immediately and logs an error — sub
 - `bash`, `gum`, `starship`, `figlet`, `lolcat`
 - `openssh-client`, `ca-certificates`
 - `terminal` — banner + system info + git info + daily tip on shell start
+
+## Testing
+
+The test suite runs automatically on every push and pull request via GitHub Actions.
+
+| Workflow | What it tests |
+| -------- | ------------- |
+| `test-terminal` | Unit tests for the terminal lib (`hooks.sh`, `preset.sh`, `git.sh`) using [bats](https://github.com/bats-core/bats-core) |
+| `test-devcontainer` | Integration tests that spin up the real devcontainer for both the `node` and `python` presets and assert the full attach flow |
+
+To run the unit tests locally:
+
+```bash
+sudo apt-get install -y bats   # or: brew install bats-core
+bats tests/terminal/
+```
 
 ## Develop
 
