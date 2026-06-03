@@ -7,7 +7,7 @@ on:
 
 jobs:
   terminal:
-    name: hooks.bats
+    name: terminal lib tests
     runs-on: ubuntu-latest
 
     steps:
@@ -18,3 +18,9 @@ jobs:
 
       - name: Run hooks tests
         run: bats tests/terminal/hooks.bats
+
+      - name: Run preset tests
+        run: bats tests/terminal/preset.bats
+
+      - name: Run git tests
+        run: bats tests/terminal/git.bats

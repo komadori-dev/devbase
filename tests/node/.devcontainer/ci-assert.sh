@@ -22,12 +22,17 @@ echo ""
 echo "devcontainer assertions"
 echo "-----------------------"
 
-# terminal binary is on PATH
+# core binaries
 assert "terminal is on PATH" "command -v terminal"
+assert "gum is on PATH"      "command -v gum"
+assert "starship is on PATH" "command -v starship"
 
 # hooks ran and wrote to the shared log
 assert "pre-attach hook ran"  "grep -q 'hello from pre attach script'  /tmp/devbase-ci.log"
 assert "post-attach hook ran" "grep -q 'hello from post attach script' /tmp/devbase-ci.log"
+
+# sysinfo box rendered
+assert "sysinfo box rendered" "grep -q 'system info' /tmp/devbase-ci.log"
 
 # node preset ran — node_modules should exist
 assert "node preset ran" "[ -d /workspace/node-example/node_modules ]"
