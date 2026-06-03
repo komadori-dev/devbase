@@ -57,4 +57,32 @@ menu_items=(
   #"other"       "bash \$LIB/other/other.sh"
 )
 
+# Add a top-level hooks sub-menu for a phase, but only when scripts exist.
+# The sub-menu lists each script individually and provides a "run all" entry.
+# Both paths call _run_hooks so execution order is always the same lexicographic
+# glob order used during the initial attach run.
+_add_hook_menu() {
+  local phase="$1"
+  local -a scripts=()
+  mapfile -t scripts < <(list_hooks "$phase")
+  (( ${#scripts[@]} == 0 )) && return
+
+  local -a sub_items=()
+  for script in "${scripts[@]}"; do
+    local label
+    label=$(basename "$script" .sh)
+    sub_items+=("$label" "run_single_hook $(printf '%q' "$phase") $(printf '%q' "$script")")
+  done
+
+  # "run all" calls _run_hooks with the resolved dir path baked in — same
+  # function and same glob order as the initial attach run.
+  local dir="$HOOKS_BASE_DIR/$phase"
+  sub_items+=("run all" "_run_hooks $(printf '%q' "$phase") $(printf '%q' "$dir")")
+
+  menu_items+=("$phase hooks" "open_menu ${sub_items[*]}")
+}
+
+_add_hook_menu "pre-attach"
+_add_hook_menu "post-attach"
+
 open_menu --default "quit" "${menu_items[@]}"

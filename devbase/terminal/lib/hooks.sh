@@ -44,3 +44,25 @@ run_pre_attach_hooks() {
 run_post_attach_hooks() {
   _run_hooks "post-attach" "$HOOKS_BASE_DIR/post-attach"
 }
+
+# List executable *.sh scripts for a phase. Prints one path per line.
+# Usage: list_hooks <phase>   (phase = "pre-attach" | "post-attach")
+list_hooks() {
+  local phase="$1"
+  local dir="$HOOKS_BASE_DIR/$phase"
+  [ -d "$dir" ] || return 0
+  for f in "$dir"/*.sh; do
+    [ -f "$f" ] && [ -x "$f" ] && echo "$f"
+  done
+}
+
+# Run a single hook script by path, with the same logging as _run_hooks.
+# Usage: run_single_hook <phase> <path>
+run_single_hook() {
+  local phase="$1"
+  local script="$2"
+  local name
+  name=$(basename "$script")
+  gum log --time rfc822 --level info "re-running $phase hook: $name"
+  bash "$script" || gum log --time rfc822 --level error "$phase hook '$name' failed (exit $?)"
+}

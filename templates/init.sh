@@ -2,7 +2,7 @@
 # devbase-init — scaffold a new project with a devbase devcontainer.
 set -euo pipefail
 
-REPO="RobinDeClerck/devcontainer"
+REPO="robindeclerck/devbase"
 BRANCH="${DEVBASE_BRANCH:-main}"
 RAW="https://raw.githubusercontent.com/$REPO/$BRANCH/templates"
 
