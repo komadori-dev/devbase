@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # lib/menu.sh — reusable gum menu
-# Usage: open_menu label1 "cmd1" label2 "cmd2" ...
+#
+# Usage: open_menu [--default <label>] label1 cmd1 label2 cmd2 ...
+#
+# Items are displayed in the order they are passed. Each label/cmd pair is
+# two consecutive arguments. A "quit" option is always appended automatically.
 
 open_menu() {
   local default=""
@@ -8,22 +12,31 @@ open_menu() {
     default=$2; shift 2
   fi
 
-  local -A menu
+  # Collect labels and commands in order, using parallel indexed arrays.
+  local -a labels=()
+  local -a commands=()
   while (( $# >= 2 )); do
-    menu[$1]=$2; shift 2
+    labels+=("$1")
+    commands+=("$2")
+    shift 2
   done
 
   local choice
   while true; do
-    choice=$(printf '%s\n' "${!menu[@]}" "quit" | sort | gum choose \
+    choice=$(printf '%s\n' "${labels[@]}" "quit" | gum choose \
       --cursor.foreground 157 \
       --selected.foreground 157 \
       --header "" \
       ${default:+--selected "$default"}) || return 0
 
-    case "$choice" in
-      quit|"") return 0 ;;
-      *)       eval "${menu[$choice]}" ;;
-    esac
+    [[ "$choice" == "quit" || -z "$choice" ]] && return 0
+
+    local i
+    for (( i = 0; i < ${#labels[@]}; i++ )); do
+      if [[ "${labels[$i]}" == "$choice" ]]; then
+        eval "${commands[$i]}"
+        break
+      fi
+    done
   done
 }

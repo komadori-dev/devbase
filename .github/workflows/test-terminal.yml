@@ -19,6 +19,9 @@ jobs:
       - name: Run hooks tests
         run: bats tests/terminal/hooks.bats
 
+      - name: Run menu tests
+        run: bats tests/terminal/menu.bats
+
       - name: Run preset tests
         run: bats tests/terminal/preset.bats
 
