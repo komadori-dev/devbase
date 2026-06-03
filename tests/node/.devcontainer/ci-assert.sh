@@ -11,10 +11,10 @@ assert() {
   local command="$2"
   if eval "$command" &>/dev/null; then
     echo "  PASS  $description"
-    (( PASS++ ))
+    PASS=$((PASS + 1))
   else
     echo "  FAIL  $description"
-    (( FAIL++ ))
+    FAIL=$((FAIL + 1))
   fi
 }
 
