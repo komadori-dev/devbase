@@ -54,6 +54,7 @@ list_hooks() {
   for f in "$dir"/*.sh; do
     [ -f "$f" ] && [ -x "$f" ] && echo "$f"
   done
+  return 0
 }
 
 # Run a single hook script by path, with the same logging as _run_hooks.

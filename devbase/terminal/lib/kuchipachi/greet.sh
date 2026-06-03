@@ -17,7 +17,7 @@ pick_motd() {
 
 print_copyright() {
   gum style --bold --foreground "$COLOR_DIM" --align center \
-  "© コマドリ.com · robin.de.clerck@gmail.com · github.com/robindeclerck/devbase"
+  "© RobinDeClerck · robin.de.clerck@gmail.com · github.com/robindeclerck/devbase"
 }
 
 # Render kuchipachi + system info side-by-side (or stacked on narrow terms).
