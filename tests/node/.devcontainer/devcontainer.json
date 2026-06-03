@@ -1,15 +1,14 @@
 {
-    "name": "DevBase Python Test Dev Container",
+    "name": "DevBase Node Test Dev Container",
     "dockerComposeFile": [
         "../docker-compose.yml",
         "docker-compose.override.yml"
     ],
-    "service": "python-example-dev",
-    "workspaceFolder": "/workspace/python-example",
+    "service": "node-example-dev",
+    "workspaceFolder": "/workspace/node-example",
     "containerEnv": {
-        "DEVBASE_PRESETS": "python",
+        "DEVBASE_PRESETS": "node",
         "DEVBASE_NO_MENU": "1"
-        //,"DEVBASE_HOOKS_DIR": "/workspace"
     },
     "postAttachCommand": "terminal 2>&1 | tee -a /tmp/devbase-ci.log",
     "customizations": {

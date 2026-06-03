@@ -1,0 +1,8 @@
+{
+  "name": "node-example",
+  "version": "1.0.0",
+  "description": "devbase node test project",
+  "dependencies": {
+    "is-odd": "^3.0.1"
+  }
+}

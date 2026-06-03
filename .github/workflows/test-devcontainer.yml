@@ -1,0 +1,63 @@
+name: Test devcontainer
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  devcontainer-python:
+    name: python test devcontainer
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Dev Container CLI
+        run: npm install -g @devcontainers/cli
+
+      - name: Build and start devcontainer
+        run: |
+          devcontainer up \
+            --workspace-folder tests/python
+
+      - name: Run postAttachCommand
+        run: |
+          devcontainer exec \
+            --workspace-folder tests/python \
+            --env DEVBASE_NO_MENU=1 \
+            bash -lc "terminal 2>&1 | tee -a /tmp/devbase-ci.log"
+
+      - name: Assert
+        run: |
+          devcontainer exec \
+            --workspace-folder tests/python \
+            bash /workspaces/python/.devcontainer/ci-assert.sh
+
+  devcontainer-node:
+    name: node test devcontainer
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Dev Container CLI
+        run: npm install -g @devcontainers/cli
+
+      - name: Build and start devcontainer
+        run: |
+          devcontainer up \
+            --workspace-folder tests/node
+
+      - name: Run postAttachCommand
+        run: |
+          devcontainer exec \
+            --workspace-folder tests/node \
+            --env DEVBASE_NO_MENU=1 \
+            bash -lc "terminal 2>&1 | tee -a /tmp/devbase-ci.log"
+
+      - name: Assert
+        run: |
+          devcontainer exec \
+            --workspace-folder tests/node \
+            bash /workspaces/node/.devcontainer/ci-assert.sh

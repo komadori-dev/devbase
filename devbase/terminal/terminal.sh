@@ -52,6 +52,9 @@ print_motd
 echo
 
 # ---- menu ----------------------------------------------------------------
+# Skip in non-interactive environments (e.g. CI). Set DEVBASE_NO_MENU=1 to
+# run terminal headlessly — all hooks, presets, and banner still execute.
+[[ "${DEVBASE_NO_MENU:-0}" == "1" ]] && exit 0
 menu_items=(
   "kuchipachi"  "open_menu 'dance' 'bash \$LIB/lib/kuchipachi/dance/dance.sh'"
   #"other"       "bash \$LIB/other/other.sh"

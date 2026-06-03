@@ -1,0 +1,8 @@
+services:
+  node-example-dev:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - .:/workspace/node-example
+    command: sleep infinity
