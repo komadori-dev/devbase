@@ -25,7 +25,7 @@ jobs:
         run: |
           devcontainer exec \
             --workspace-folder tests/python \
-            --env DEVBASE_NO_MENU=1 \
+            --remote-env DEVBASE_NO_MENU=1 \
             bash -lc "terminal 2>&1 | tee -a /tmp/devbase-ci.log"
 
       - name: Assert
@@ -53,7 +53,7 @@ jobs:
         run: |
           devcontainer exec \
             --workspace-folder tests/node \
-            --env DEVBASE_NO_MENU=1 \
+            --remote-env DEVBASE_NO_MENU=1 \
             bash -lc "terminal 2>&1 | tee -a /tmp/devbase-ci.log"
 
       - name: Assert

@@ -1,4 +1,4 @@
-name: Test
+name: Test terminal
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  hooks:
+  terminal:
     name: hooks.bats
     runs-on: ubuntu-latest
 
@@ -17,4 +17,4 @@ jobs:
         run: sudo apt-get install -y bats
 
       - name: Run hooks tests
-        run: bats tests/hooks/hooks.bats
+        run: bats tests/terminal/hooks.bats
