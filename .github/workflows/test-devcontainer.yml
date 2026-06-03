@@ -32,7 +32,7 @@ jobs:
         run: |
           devcontainer exec \
             --workspace-folder tests/python \
-            bash /workspaces/python/.devcontainer/ci-assert.sh
+            bash /workspace/python-example/.devcontainer/ci-assert.sh
 
   devcontainer-node:
     name: node test devcontainer
@@ -60,4 +60,4 @@ jobs:
         run: |
           devcontainer exec \
             --workspace-folder tests/node \
-            bash /workspaces/node/.devcontainer/ci-assert.sh
+            bash /workspace/node-example/.devcontainer/ci-assert.sh
