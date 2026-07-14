@@ -8,7 +8,7 @@ on:
 jobs:
   devcontainer-python:
     name: python test devcontainer
-    runs-on: ubuntu-latest
+    runs-on: komadori-runners
 
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +36,7 @@ jobs:
 
   devcontainer-node:
     name: node test devcontainer
-    runs-on: ubuntu-latest
+    runs-on: komadori-runners
 
     steps:
       - uses: actions/checkout@v4

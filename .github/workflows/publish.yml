@@ -11,7 +11,7 @@ env:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: komadori-runners
     permissions:
       contents: read
       packages: write   # write to GHCR

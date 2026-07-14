@@ -8,7 +8,7 @@ on:
 jobs:
   terminal:
     name: terminal lib tests
-    runs-on: ubuntu-latest
+    runs-on: komadori-runners
 
     steps:
       - uses: actions/checkout@v4
