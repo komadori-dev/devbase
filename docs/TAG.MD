@@ -3,7 +3,7 @@
 ## Develop
 
 ```bash
-git clone git@github.com:robindeclerck/devbase.git
+git clone git@github.com:komadori-dev/devbase.git
 # Open in VS Code → Reopen in Container
 ```
 

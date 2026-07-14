@@ -2,7 +2,7 @@
 
 > _"It works on my machine."_ — Famous last words, before dev containers.
 
-[![Publish image](https://github.com/robindeclerck/devbase/actions/workflows/publish.yml/badge.svg)](https://github.com/robindeclerck/devbase/actions/workflows/publish.yml) [![devcontainer](https://github.com/robindeclerck/devbase/actions/workflows/test-devcontainer.yml/badge.svg)](https://github.com/robindeclerck/devbase/actions/workflows/test-devcontainer.yml) [![BASH MENU/TERMINAL](https://github.com/robindeclerck/devbase/actions/workflows/test-terminal.yml/badge.svg)](https://github.com/robindeclerck/devbase/actions/workflows/test-terminal.yml)
+[![Publish image](https://github.com/komadori-dev/devbase/actions/workflows/publish.yml/badge.svg)](https://github.com/komadori-dev/devbase/actions/workflows/publish.yml) [![devcontainer](https://github.com/komadori-dev/devbase/actions/workflows/test-devcontainer.yml/badge.svg)](https://github.com/komadori-dev/devbase/actions/workflows/test-devcontainer.yml) [![BASH MENU/TERMINAL](https://github.com/komadori-dev/devbase/actions/workflows/test-terminal.yml/badge.svg)](https://github.com/komadori-dev/devbase/actions/workflows/test-terminal.yml)
 
 A shared Alpine-based dev container image with a terminal banner, [Starship](https://starship.rs) prompt, and language presets that auto-install dependencies on attach.
 
@@ -13,7 +13,7 @@ A shared Alpine-based dev container image with a terminal banner, [Starship](htt
 Scaffold a new project's `.devcontainer/` interactively:
 
 ```bash
-bash -c "$(curl -fsSL "https://raw.githubusercontent.com/robindeclerck/devbase/main/templates/init.sh?$(date +%s)")"
+bash -c "$(curl -fsSL "https://raw.githubusercontent.com/komadori-dev/devbase/main/templates/init.sh?$(date +%s)")"
 ```
 
 Walks you through name, slug, and preset, then drops `.devcontainer/devcontainer.json`, `Dockerfile`, `docker-compose.override.yml`, and `docker-compose.yml` into the current directory.
@@ -26,7 +26,7 @@ In any project's `.devcontainer/devcontainer.json`:
 
 ```jsonc
 {
-  "image": "ghcr.io/robindeclerck/devbase:latest",
+  "image": "ghcr.io/komadori-dev/devbase:latest",
   "containerEnv": { "DEVBASE_PRESETS": "python" },
   "postAttachCommand": "bash -lc terminal"
 }
@@ -35,7 +35,7 @@ In any project's `.devcontainer/devcontainer.json`:
 Need extra tools? Extend it with a project-local Dockerfile:
 
 ```dockerfile
-FROM ghcr.io/robindeclerck/devbase:latest
+FROM ghcr.io/komadori-dev/devbase:latest
 RUN apk add --no-cache python3 py3-pip && \
     rm -f /usr/lib/python*/EXTERNALLY-MANAGED
 ```

@@ -1,4 +1,4 @@
-FROM ghcr.io/robindeclerck/devbase:latest
+FROM ghcr.io/komadori-dev/devbase:latest
 
 RUN apk add --no-cache nodejs npm
 

@@ -1,4 +1,4 @@
-FROM ghcr.io/robindeclerck/devbase:latest
+FROM ghcr.io/komadori-dev/devbase:latest
 
 ENV PYTHONPATH=/workspace/python-example \
     PIP_ROOT_USER_ACTION=ignore \
