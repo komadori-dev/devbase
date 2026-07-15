@@ -23,17 +23,16 @@ jobs:
 
       # devcontainers/cli shells out to the standalone `docker-compose`
       # binary, which modern Docker no longer ships (it's now the `docker
-      # compose` subcommand). Install the compose plugin and shim the old
-      # binary name so the CLI can find it.
+      # compose` subcommand). Ubuntu's default apt repos don't carry
+      # docker-compose-plugin either (that needs Docker's own apt repo),
+      # so just fetch the standalone binary directly from its GitHub
+      # releases instead of depending on any package repo.
       - name: Install docker-compose
         run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose-plugin
-          sudo tee /usr/local/bin/docker-compose > /dev/null << 'SCRIPT'
-          #!/usr/bin/env bash
-          exec docker compose "$@"
-          SCRIPT
+          sudo curl -SL https://github.com/docker/compose/releases/download/v2.29.7/docker-compose-linux-x86_64 \
+            -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
+          docker-compose version
 
       - name: Build and start devcontainer
         run: |
@@ -70,17 +69,16 @@ jobs:
 
       # devcontainers/cli shells out to the standalone `docker-compose`
       # binary, which modern Docker no longer ships (it's now the `docker
-      # compose` subcommand). Install the compose plugin and shim the old
-      # binary name so the CLI can find it.
+      # compose` subcommand). Ubuntu's default apt repos don't carry
+      # docker-compose-plugin either (that needs Docker's own apt repo),
+      # so just fetch the standalone binary directly from its GitHub
+      # releases instead of depending on any package repo.
       - name: Install docker-compose
         run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose-plugin
-          sudo tee /usr/local/bin/docker-compose > /dev/null << 'SCRIPT'
-          #!/usr/bin/env bash
-          exec docker compose "$@"
-          SCRIPT
+          sudo curl -SL https://github.com/docker/compose/releases/download/v2.29.7/docker-compose-linux-x86_64 \
+            -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
+          docker-compose version
 
       - name: Build and start devcontainer
         run: |
