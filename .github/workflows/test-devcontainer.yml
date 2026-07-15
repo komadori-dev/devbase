@@ -21,6 +21,20 @@ jobs:
       - name: Install Dev Container CLI
         run: npm install -g @devcontainers/cli
 
+      # devcontainers/cli shells out to the standalone `docker-compose`
+      # binary, which modern Docker no longer ships (it's now the `docker
+      # compose` subcommand). Install the compose plugin and shim the old
+      # binary name so the CLI can find it.
+      - name: Install docker-compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose-plugin
+          sudo tee /usr/local/bin/docker-compose > /dev/null << 'SCRIPT'
+          #!/usr/bin/env bash
+          exec docker compose "$@"
+          SCRIPT
+          sudo chmod +x /usr/local/bin/docker-compose
+
       - name: Build and start devcontainer
         run: |
           devcontainer up \
@@ -53,6 +67,20 @@ jobs:
 
       - name: Install Dev Container CLI
         run: npm install -g @devcontainers/cli
+
+      # devcontainers/cli shells out to the standalone `docker-compose`
+      # binary, which modern Docker no longer ships (it's now the `docker
+      # compose` subcommand). Install the compose plugin and shim the old
+      # binary name so the CLI can find it.
+      - name: Install docker-compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose-plugin
+          sudo tee /usr/local/bin/docker-compose > /dev/null << 'SCRIPT'
+          #!/usr/bin/env bash
+          exec docker compose "$@"
+          SCRIPT
+          sudo chmod +x /usr/local/bin/docker-compose
 
       - name: Build and start devcontainer
         run: |
